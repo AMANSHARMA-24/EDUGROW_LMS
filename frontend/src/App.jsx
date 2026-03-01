@@ -3,7 +3,7 @@ import Home from './pages/Home'
 import { Route, Routes ,  Navigate} from 'react-router-dom'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
-export const serverUrl = "http://localhost:8000";
+export const serverUrl = "https://edugrow-lms.onrender.com";
 import {ToastContainer} from "react-toastify"
 import useGetUser from './customHooks/UsegetCurrentUser'
 import Profile from './pages/profile'
