@@ -32,8 +32,8 @@ export const signUp = async (req, resp) => {
     const token = await generateToken(newuser._id);
     resp.cookie("token", token, {
       httpOnly: true,
-      secure: false,          // localhost
-      sameSite: "lax",        // 🔥 strict ❌
+      secure: true,          // localhost
+      sameSite: "none",        // 🔥 strict ❌
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000
     })
@@ -59,8 +59,8 @@ export const signIn = async (req, resp) => {
     const token = await generateToken(e._id);
     resp.cookie("token", token, {
       httpOnly: true,
-      secure: false,          // localhost
-      sameSite: "lax",        // 🔥 strict ❌
+      secure: true,          // localhost
+      sameSite: "none",        // 🔥 strict ❌
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000
     })
@@ -178,8 +178,8 @@ export const googleAuth = async (req, resp) => {
       const token = await generateToken(user._id);
       resp.cookie("token", token, {
         httpOnly: true,
-        secure: false, // localhost
-        sameSite: "lax",
+        secure: true, // localhost
+        sameSite: "none",
         path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000
       });
@@ -192,8 +192,8 @@ export const googleAuth = async (req, resp) => {
     const token = await generateToken(newUser._id);
     resp.cookie("token", token, {
       httpOnly: true,
-      secure: false, // localhost
-      sameSite: "lax",
+      secure: true, // localhost
+      sameSite: "none",
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
