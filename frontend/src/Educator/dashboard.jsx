@@ -14,10 +14,12 @@ function Dashboard() {
   const firstLetter = name.charAt(0).toUpperCase();
 
   //Calculating total earning
-  let totalearning = 0;
-  CreatorCourses?.map((course) => (
-         totalearning  = (totalearning+(course.enrolledStudents?.length || 0)*course.price)
-  ));
+  // Ensure price is a number
+const totalearning = CreatorCourses?.reduce((acc, course) => {
+  const enrolledCount = course.enrolledStudents?.length || 0;
+  const price = Number(course.price) || 0; // Convert price to number, fallback to 0
+  return acc + enrolledCount * price;
+}, 0);
 
   // Prepare combined chart data
   const chartData = CreatorCourses?.map((course) => ({

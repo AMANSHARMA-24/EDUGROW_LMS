@@ -99,28 +99,32 @@ function SearchWithAi() {
           Search with <span className="text-purple-700">AI</span>
         </h2>
 
-        <div className="flex items-center w-full bg-black rounded-full shadow-inner p-1">
-          <button onClick={() => handleSearch()} className="px-4 py-2 text-white hover:text-gray-500">
-            <FaSearch className="text-xl" />
+        {/* Input field stays on top */}
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for courses..."
+          className="w-full p-3 rounded-full outline-none bg-black text-white placeholder-gray-500 mb-4"
+        />
+
+        {/* Buttons container: stacked on mobile, inline on larger screens */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
+          {/* Search Button */}
+          <button
+            onClick={() => handleSearch()}
+            className="px-6 py-3 rounded-full bg-purple-700 text-white hover:bg-purple-600 transition w-full sm:w-auto"
+          >
+            <FaSearch className="inline mr-2" /> Search
           </button>
 
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for courses..."
-            className="flex-1 p-3 rounded-full outline-none bg-black text-white placeholder-gray-500"
-          />
-
+          {/* Microphone Button */}
           <button
-            className={`p-3 rounded-full transition-all duration-300 ease-in-out transform ${
-              listening
-                ? "animate-pulse scale-110 text-purple-400 ring-10 ring-purple-400 ring-opacity-80"
-                : "hover:bg-gray-400 scale-100 text-white ring-0"
-            }`}
             onClick={handleMic}
+            className={`px-6 py-3 rounded-full bg-black text-white hover:bg-gray-800 transition w-full sm:w-auto ${listening ? "animate-pulse scale-105 text-purple-400 ring-4 ring-purple-400 ring-opacity-50" : ""
+              }`}
           >
-            <FaMicrophone className="text-xl" />
+            <FaMicrophone className="inline mr-2" /> Speak
           </button>
         </div>
       </div>

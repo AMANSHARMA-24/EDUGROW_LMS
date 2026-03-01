@@ -22,10 +22,8 @@ export const getUserForAdmin = async (req, resp) => {
   }
 };
 
-
 export const deleteUserByAdmin = async (req, res) => {
   try {
-    
     const currentUser = await User.findById(req.userId);
 
     if (!currentUser || currentUser.role !== "admin") {
@@ -34,18 +32,32 @@ export const deleteUserByAdmin = async (req, res) => {
 
     const { id } = req.params;
 
-    //  admin khud ko delete na kare
+    // Admin cannot delete themselves
     if (req.userId === id) {
       return res.status(400).json({ message: "Admin cannot delete himself" });
     }
 
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({ message: "User deleted successfully" });
+    // If user is an educator, delete all their courses
+    if (user.role === "educator") {
+      await Course.deleteMany({ creator: user._id });
+    }
+
+    // Remove user from enrolledStudents in all courses
+    await Course.updateMany(
+      { enrolledStudents: user._id },
+      { $pull: { enrolledStudents: user._id } }
+    );
+
+    // Delete the user
+    await User.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "User and their courses removed successfully" });
 
   } catch (error) {
     console.log(error);

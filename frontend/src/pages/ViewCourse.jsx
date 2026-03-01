@@ -176,6 +176,7 @@ function ViewCourse() {
             );
         }
     };
+    
 
     return (
         <div className="min-h-screen bg-linear-to-l from-black to-purple-900 p-6">
@@ -193,10 +194,14 @@ function ViewCourse() {
 
                 <div className="flex-1 space-y-4">
                     <h1 className="text-3xl font-bold">{selectedCourse.title}</h1>
-                    <p className="text-gray-600">{selectedCourse.subtitle}</p>
-                    <p className="text-gray-600">{selectedCourse.description}</p>
+                    <p className="text-gray-600">{selectedCourse?.subtitle}</p>
+                    <p className="text-gray-600">{selectedCourse?.description}</p>
+                    
                     <div className="text-2xl font-semibold text-purple-700">₹ {selectedCourse.price || 0}</div>
-
+                    <div className="flex-1 ">
+                        <p className="text-gray-800">{creator?.name}</p>
+                    <p className="text-gray-800">{creator?.email}</p>
+                    </div>
                     {isEnrolled ? (
                         <button
                             className="bg-green-700 text-white p-2 rounded-lg mt-5 hover:bg-green-800"
