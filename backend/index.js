@@ -36,9 +36,9 @@ app.use("/api/admin" , adminRoutes)
 app.get("/" , (req,res)=>{
     res.send("hello from server");
 })
-app.get("/health" , (req,res)=>{
-    return res.status(200)json("i am active");
-})
+app.get("/health", (req, res) => {
+    return res.status(200).json({ message: "I am active" });
+});
 
 app.listen(port , ()=>{
     connectDb();
